@@ -190,6 +190,70 @@ const msg=document.getElementById("contact-message").value.trim();
 if(!msg){alert("Écris ton message d'abord.");return}
 alert("Ton message est prêt, mais le contact Telegram n'est pas encore connecté.");
 }
+const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/e24e0oli68caendkap3ww2nuiybfg5eg";
+
+document.getElementById("order-form").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  if (!Object.keys(cart).length) {
+    alert("Ajoute un produit au panier.");
+    showView("home");
+    return;
+  }
+
+  if (MAKE_WEBHOOK_URL === "COLLE_ICI_TA_NOUVELLE_URL_WEBHOOK") {
+    alert("Configure d'abord l'URL du webhook Make.");
+    return;
+  }
+
+  const button = e.target.querySelector('button[type="submit"]');
+  button.disabled = true;
+  button.textContent = "Envoi en cours...";
+
+  const order = {
+    customer: document.getElementById("customer").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+    address: document.getElementById("address").value.trim(),
+    delivery: document.getElementById("delivery").value,
+    notes: document.getElementById("notes").value.trim(),
+    items: Object.entries(cart).map(([id, quantity]) => {
+      const p = catalog.find(x => x.id == id);
+      return {
+        product: p.name,
+        price: p.price,
+        quantity: quantity,
+        subtotal: p.price * quantity
+      };
+    }),
+    total: total(),
+    currency: "EUR",
+    createdAt: new Date().toISOString()
+  };
+
+  try {
+    await fetch(MAKE_WEBHOOK_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+      },
+      body: new URLSearchParams({
+        order: JSON.stringify(order)
+      })
+    });
+
+    alert("Demande envoyée. Vérifie sa réception dans Make avant de confirmer la commande.");
+    cart = {};
+    updateCart();
+    e.target.reset();
+    showView("home");
+  } catch (error) {
+    alert("Envoi impossible. Vérifie le webhook Make et réessaie.");
+  } finally {
+    button.disabled = false;
+    button.textContent = "Préparer ma commande";
+  }
+});
 document.getElementById("order-form").addEventListener("submit",e=>{
 e.preventDefault();
 if(!Object.keys(cart).length){alert("Ajoute un produit au panier.");showView("home");return}
