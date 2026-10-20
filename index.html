@@ -27,5 +27,255 @@ p{line-height:1.55}
 .filters{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:18px 0}
 select,input,textarea{width:100%;padding:12px;background:#0b100b;color:white;border:1px solid #315b30;border-radius:12px}
 .count{display:inline-block;margin-top:18px;color:var(--green);border:1px solid #34752c;border-radius:20px;padding:7px 12px;font-size:13px}
-.products{display:grid;grid-template-columns:repeat(2,minmax
-```
+.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.product{overflow:hidden;border:1px solid #28572b;border-radius:17px;background:#0b100b;box-shadow:0 5px 22px #0008}
+.photo{height:125px;display:grid;place-items:center;background:radial-gradient(circle,#28472a,#101510 70%);font-size:53px}
+.product-info{padding:11px}
+.product h3{font-size:14px;line-height:1.4;min-height:39px;margin:0}
+.price{color:var(--green);font-size:18px;font-weight:900;margin:10px 0}
+.add,.primary{width:100%;padding:12px;border:0;border-radius:12px;background:var(--green);color:#061005;font-weight:900;margin-top:9px}
+.outline{width:100%;margin-top:7px}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:24px 0 12px}
+.section-title h2{font-size:14px;letter-spacing:2px;color:var(--green)}
+.panel{padding:16px;background:#0c110c;border:1px solid #294c2b;border-radius:18px;margin:12px 0}
+.line{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #263126}
+.line:last-child{border-bottom:0}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{background:#142416;color:var(--green);border:1px solid #34752c;border-radius:50%;width:30px;height:30px}
+.field{display:grid;gap:7px;margin:13px 0}
+.field label{font-size:13px;color:#c2d0c1}
+.view{display:none}
+.view.active{display:block}
+.empty{text-align:center;color:var(--muted);padding:25px}
+.notice{padding:12px;border:1px solid #397135;border-radius:12px;background:#122015;color:#d7fbd2;font-size:13px;line-height:1.5}
+.dock{position:fixed;z-index:8;bottom:8px;left:10px;right:10px;max-width:700px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);padding:7px;background:#080b08f5;border:1px solid #315b30;border-radius:20px;box-shadow:0 0 25px #39ff1420}
+.dock button{border:0;background:transparent;color:#a0aaa0;padding:8px 0;font-size:11px;border-radius:12px}
+.dock button span{display:block;font-size:20px;margin-bottom:4px}
+.dock button.active{color:var(--green);background:#142416}
+.badge{color:var(--green);font-weight:bold}
+.review{border-bottom:1px solid #263126;padding:12px 0}
+.stars{color:var(--green)}
+.footer{text-align:center;color:#7e8c80;font-size:11px;padding:25px 0}
+.modal{display:none;position:fixed;z-index:20;inset:0;background:#000c;align-items:flex-end}
+.modal.show{display:flex}
+.sheet{background:#0b110b;border:1px solid #397135;border-radius:22px 22px 0 0;padding:20px;width:100%;max-height:85vh;overflow:auto}
+@media(min-width:650px){.products{grid-template-columns:repeat(3,minmax(0,1fr))}.photo{height:180px}.wrap{padding:25px}}
+@media(min-width:900px){.products{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<main class="app">
+<header>
+<div class="brand"><div class="logo">S</div><div><strong>SULLY MARKET</strong><small>BOUTIQUE OFFICIELLE</small></div></div>
+<button class="pill" onclick="showView('cart')">🛒 <span id="cart-count">0</span></button>
+</header>
+
+<div class="wrap">
+<section class="view active" id="home">
+<div class="welcome">
+<div class="eyebrow">● BIENVENUE CHEZ SULLY</div>
+<h1>Ta sélection.<br><span style="color:var(--green)">Ton univers.</span></h1>
+<p class="muted">Découvre notre catalogue et retrouve les informations de chaque produit.</p>
+</div>
+<div class="count" id="product-count">6 produits</div>
+<div class="filters">
+<select id="category" onchange="renderProducts()">
+<option value="all">Toutes catégories</option>
+<option value="fleurs">Fleurs CBD</option>
+<option value="resines">Résines CBD</option>
+<option value="huiles">Huiles</option>
+<option value="infusions">Infusions</option>
+<option value="soins">Soins</option>
+</select>
+<select id="sort" onchange="renderProducts()">
+<option value="featured">À la une</option>
+<option value="low">Prix croissant</option>
+<option value="high">Prix décroissant</option>
+</select>
+</div>
+<div class="products" id="products"></div>
+<div class="footer">SULLY MARKET · Catalogue de démonstration</div>
+</section>
+
+<section class="view" id="cart">
+<div class="section-title"><h2>MON PANIER</h2><button class="outline" onclick="showView('home')">Continuer</button></div>
+<div class="panel" id="cart-lines"></div>
+<div class="panel"><div class="line"><strong>Total estimé</strong><strong class="price" id="cart-total">0,00 €</strong></div><button class="primary" onclick="goCheckout()">Continuer la commande →</button></div>
+</section>
+
+<section class="view" id="checkout">
+<div class="section-title"><h2>COMMANDE</h2></div>
+<div class="notice">Ta demande sera envoyée à Make. Attends la confirmation du vendeur avant de considérer la commande comme acceptée.</div>
+<form id="order-form" class="panel">
+<div class="field"><label for="customer">Nom et prénom</label><input id="customer" required placeholder="Ton nom"></div>
+<div class="field"><label for="phone">Téléphone</label><input id="phone" type="tel" required placeholder="Ton numéro"></div>
+<div class="field"><label for="address">Adresse</label><input id="address" required placeholder="Adresse de livraison"></div>
+<div class="field"><label for="delivery">Mode de livraison</label><select id="delivery"><option>À définir avec le vendeur</option><option>Retrait à convenir</option><option>Livraison à convenir</option></select></div>
+<div class="field"><label for="notes">Message complémentaire</label><textarea id="notes" rows="3" placeholder="Précisions facultatives"></textarea></div>
+<div class="line"><strong>Total estimé</strong><strong class="price" id="checkout-total">0,00 €</strong></div>
+<button class="primary" type="submit">Envoyer ma demande</button>
+</form>
+</section>
+
+<section class="view" id="reviews">
+<div class="section-title"><h2>AVIS CLIENTS</h2></div>
+<div class="panel"><p class="muted">Les avis ci-dessous sont des exemples de présentation, pas des témoignages vérifiés.</p>
+<div class="review"><div class="stars">★★★★★</div><strong>Exemple client</strong><p class="muted">Présentation claire et navigation simple.</p></div>
+<div id="new-reviews"></div>
+</div>
+<form id="review-form" class="panel"><h3>Ajouter un avis</h3>
+<div class="field"><label for="review-name">Prénom</label><input id="review-name" required></div>
+<div class="field"><label for="review-score">Note</label><select id="review-score"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select></div>
+<div class="field"><label for="review-text">Commentaire</label><textarea id="review-text" required></textarea></div>
+<button class="primary" type="submit">Ajouter à cette démo</button>
+</form>
+</section>
+
+<section class="view" id="contact">
+<div class="section-title"><h2>CONTACT</h2></div>
+<div class="panel"><p>Une question ? Contacte Sully Market.</p>
+<div class="field"><label for="contact-message">Ton message</label><textarea id="contact-message" rows="4" placeholder="Écris ton message"></textarea></div>
+<button class="primary" onclick="contactMessage()">Préparer le message</button>
+<p class="muted">Le lien de contact Telegram pourra être ajouté avec ton nom d’utilisateur.</p>
+</div>
+</section>
+</div>
+
+<nav class="dock">
+<button class="active" data-view="home" onclick="showView('home')"><span>⌂</span>Accueil</button>
+<button data-view="reviews" onclick="showView('reviews')"><span>☆</span>Avis</button>
+<button data-view="cart" onclick="showView('cart')"><span>🛒</span>Panier <span class="badge" id="dock-count">0</span></button>
+<button data-view="contact" onclick="showView('contact')"><span>✉</span>Contact</button>
+</nav>
+
+<div class="modal" id="product-modal" onclick="if(event.target===this)closeProduct()">
+<div class="sheet"><button class="outline" onclick="closeProduct()">Fermer ✕</button><div id="product-detail"></div></div>
+</div>
+</main>
+
+<script>
+const catalog=[
+{id:1,name:"Fleur CBD — Green House",cat:"fleurs",price:8.90,emoji:"🌿",desc:"Exemple de fiche produit à adapter aux informations réelles."},
+{id:2,name:"Fleur CBD — Indoor Premium",cat:"fleurs",price:12.90,emoji:"🍃",desc:"Exemple de présentation à vérifier avant publication."},
+{id:3,name:"Résine CBD — Amnesia",cat:"resines",price:10.90,emoji:"🟩",desc:"Exemple de fiche produit à adapter."},
+{id:4,name:"Huile CBD — 10 %",cat:"huiles",price:24.50,emoji:"🧴",desc:"Compléter les caractéristiques et mentions obligatoires."},
+{id:5,name:"Infusion au chanvre",cat:"infusions",price:7.50,emoji:"🍵",desc:"Fiche de démonstration à adapter."},
+{id:6,name:"Baume au chanvre",cat:"soins",price:16.90,emoji:"🌱",desc:"Fiche de démonstration à adapter."}
+];
+
+let cart={};
+const euros=n=>n.toLocaleString("fr-FR",{style:"currency",currency:"EUR"});
+
+function renderProducts(){
+const c=document.getElementById("category").value;
+const s=document.getElementById("sort").value;
+let arr=catalog.filter(p=>c==="all"||p.cat===c);
+if(s==="low")arr.sort((a,b)=>a.price-b.price);
+if(s==="high")arr.sort((a,b)=>b.price-a.price);
+document.getElementById("product-count").textContent=arr.length+" produit(s)";
+document.getElementById("products").innerHTML=arr.map(p=>`<article class="product"><div class="photo" onclick="openProduct(${p.id})">${p.emoji}</div><div class="product-info"><h3>${p.name}</h3><div class="price">${euros(p.price)}</div><button class="add" onclick="add(${p.id})">＋ Ajouter</button><button class="outline" onclick="openProduct(${p.id})">Voir le produit</button></div></article>`).join("");
+}
+
+function add(id){cart[id]=(cart[id]||0)+1;updateCart()}
+function change(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];updateCart()}
+function total(){return Object.entries(cart).reduce((sum,[id,q])=>sum+catalog.find(p=>p.id==id).price*q,0)}
+
+function updateCart(){
+const count=Object.values(cart).reduce((a,b)=>a+b,0);
+document.getElementById("cart-count").textContent=count;
+document.getElementById("dock-count").textContent=count;
+const entries=Object.entries(cart);
+document.getElementById("cart-lines").innerHTML=entries.length?entries.map(([id,q])=>{const p=catalog.find(x=>x.id==id);return `<div class="line"><div><strong>${p.emoji} ${p.name}</strong><div class="muted">${euros(p.price)} / unité</div></div><div class="qty"><button onclick="change(${id},-1)">−</button>${q}<button onclick="change(${id},1)">+</button></div><strong>${euros(p.price*q)}</strong></div>`}).join(""):'<div class="empty">Ton panier est vide.</div>';
+document.getElementById("cart-total").textContent=euros(total());
+document.getElementById("checkout-total").textContent=euros(total());
+}
+
+function showView(v){
+document.querySelectorAll(".view").forEach(e=>e.classList.toggle("active",e.id===v));
+document.querySelectorAll(".dock button").forEach(e=>e.classList.toggle("active",e.dataset.view===v));
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function goCheckout(){
+if(!Object.keys(cart).length){alert("Ajoute un produit au panier.");showView("home");return}
+showView("checkout");
+}
+
+function openProduct(id){
+const p=catalog.find(x=>x.id===id);
+document.getElementById("product-detail").innerHTML=`<div class="photo" style="border-radius:15px;margin:15px 0">${p.emoji}</div><div class="eyebrow">FICHE PRODUIT</div><h2>${p.name}</h2><p>${p.desc}</p><div class="price">${euros(p.price)}</div><button class="primary" onclick="add(${p.id});closeProduct()">Ajouter au panier</button>`;
+document.getElementById("product-modal").classList.add("show");
+}
+function closeProduct(){document.getElementById("product-modal").classList.remove("show")}
+
+function contactMessage(){
+const msg=document.getElementById("contact-message").value.trim();
+if(!msg){alert("Écris ton message d'abord.");return}
+alert("Ton message est prêt, mais le contact Telegram n'est pas encore connecté.");
+}
+
+/* Ancienne URL du webhook Make demandée */
+const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/e24e0oli68caendkap3ww2nuiybfg5eg";
+
+document.getElementById("order-form").addEventListener("submit",async e=>{
+e.preventDefault();
+
+if(!Object.keys(cart).length){
+alert("Ajoute un produit au panier.");
+showView("home");
+return;
+}
+
+const button=e.target.querySelector('button[type="submit"]');
+button.disabled=true;
+button.textContent="Envoi en cours…";
+
+const order={
+customer:document.getElementById("customer").value.trim(),
+phone:document.getElementById("phone").value.trim(),
+address:document.getElementById("address").value.trim(),
+delivery:document.getElementById("delivery").value,
+notes:document.getElementById("notes").value.trim(),
+items:Object.entries(cart).map(([id,quantity])=>{
+const p=catalog.find(x=>x.id==id);
+return {product:p.name,price:p.price,quantity:quantity,subtotal:p.price*quantity};
+}),
+total:total(),
+currency:"EUR",
+createdAt:new Date().toISOString()
+};
+
+try{
+await fetch(MAKE_WEBHOOK_URL,{
+method:"POST",
+mode:"no-cors",
+headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
+body:new URLSearchParams({order:JSON.stringify(order)})
+});
+alert("Demande envoyée. Vérifie sa réception dans Make avant de confirmer la commande.");
+cart={};
+updateCart();
+e.target.reset();
+showView("home");
+}catch(error){
+alert("Envoi impossible. Vérifie le webhook Make et réessaie.");
+}finally{
+button.disabled=false;
+button.textContent="Envoyer ma demande";
+}
+});
+
+document.getElementById("review-form").addEventListener("submit",e=>{
+e.preventDefault();
+const name=document.getElementById("review-name").value.replace(/[<>]/g,"");
+const score=Number(document.getElementById("review-score").value);
+const txt=document.getElementById("review-text").value.replace(/[<>]/g,"");
+document.getElementById("new-reviews").insertAdjacentHTML("afterbegin",`<div class="review"><div class="stars">${"★".repeat(score)}${"☆".repeat(5-score)}</div><strong>${name}</strong><p>${txt}</p><span class="muted">Avis local de démonstration</span></div>`);
+e.target.reset();
+});
+
+renderProducts();
+updateCart();
+</script>
+</body>
+</html>
