@@ -189,8 +189,7 @@ function contactMessage(){
 const msg=document.getElementById("contact-message").value.trim();
 if(!msg){alert("Écris ton message d'abord.");return}
 alert("Ton message est prêt, mais le contact Telegram n'est pas encore connecté.");
-}
-document.getElementById("order-form").addEventListener("submit",e=>{
+}const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/thyj9bj3yhqnzuffr60sksqkl72qtgru";{
 e.preventDefault();
 if(!Object.keys(cart).length){alert("Ajoute un produit au panier.");showView("home");return}
 alert("Commande de démonstration préparée. Rien n'a été envoyé à Telegram. La connexion à Make reste à réaliser.");
