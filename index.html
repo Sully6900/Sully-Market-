@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="fr">
 <head>
@@ -206,59 +205,6 @@ e.target.reset();
 });
 renderProducts();
 updateCart();
-
-<script>
-const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/loi1jcc13gfijxmyf6uecy9q7t2esaoc";
-
-const oldForm = document.getElementById("order-form");
-const form = oldForm.cloneNode(true);
-oldForm.replaceWith(form);
-
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  if (!Object.keys(cart).length) {
-    alert("Ajoute d'abord un produit au panier.");
-    showView("home");
-    return;
-  }
-
-  const order = {
-    ref: "SM-" + Date.now().toString().slice(-6),
-    customer: document.getElementById("customer").value,
-    phone: document.getElementById("phone").value,
-    address: document.getElementById("address").value,
-    day: document.getElementById("day").value,
-    slot: document.getElementById("slot").value,
-    notes: document.getElementById("notes").value,
-    total: total().toFixed(2),
-    items: JSON.stringify(
-      Object.entries(cart).map(([id, q]) => {
-        const p = catalog.find(x => x.id == id);
-        return {
-          name: p.name,
-          quantity: q,
-          unitPrice: p.price
-        };
-      })
-    )
-  };
-
-  try {
-    await fetch(MAKE_WEBHOOK_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-      },
-      body: new URLSearchParams(order)
-    });
-
-    alert("Demande envoyée. Vérifie maintenant si Make a reçu la commande.");
-  } catch (error) {
-    alert("Envoi impossible. Vérifie l'adresse du webhook et ta connexion.");
-    return;
-  }
-});
 </script>
-</body></html>
+</body>
+</html>
