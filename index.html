@@ -1,288 +1,211 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#090d16">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050705">
 <title>Sully Market</title>
 <style>
-:root {
-  --bg:#090d16;
-  --card:#121a29;
-  --blue:#2489ff;
-  --text:#f5f7ff;
-  --muted:#9aa9c1;
-}
-* { box-sizing:border-box; }
-body {
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;
-}
-header {
-  padding:22px 18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #202a3c;
-  position:sticky;
-  top:0;
-  background:#090d16f5;
-  z-index:5;
-}
-.logo { font-size:21px; font-weight:900; }
-.logo span { color:var(--blue); }
-.pill {
-  background:#102747;
-  color:#72b5ff;
-  border:1px solid #24528b;
-  padding:8px 12px;
-  border-radius:20px;
-  font-size:12px;
-}
-main { max-width:900px; margin:auto; padding:20px 16px 90px; }
-.hero {
-  padding:30px 20px;
-  border-radius:22px;
-  background:linear-gradient(140deg,#142c4d,#101827 65%,#111827);
-  border:1px solid #263a57;
-}
-.eyebrow {
-  color:#65aaff;
-  font-size:12px;
-  letter-spacing:2px;
-  font-weight:800;
-}
-h1 { font-size:34px; line-height:1.12; margin:14px 0; }
-p { color:var(--muted); line-height:1.6; }
-.actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
-.btn {
-  display:inline-block;
-  padding:13px 16px;
-  border-radius:12px;
-  text-decoration:none;
-  color:white;
-  font-weight:700;
-  text-align:center;
-  border:1px solid #34445e;
-  background:#182337;
-  cursor:pointer;
-}
-.btn.primary {
-  background:var(--blue);
-  border-color:var(--blue);
-}
-.section-head {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:30px 0 16px;
-  gap:12px;
-}
-h2 { font-size:21px; margin:0; }
-.small { font-size:12px; color:var(--muted); }
-.grid {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:13px;
-}
-.product {
-  background:var(--card);
-  border:1px solid #243148;
-  border-radius:17px;
-  overflow:hidden;
-}
-.product img,.product video {
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:cover;
-  display:block;
-  background:#182337;
-}
-.product-body { padding:13px; }
-.product h3 { margin:0 0 7px; font-size:16px; }
-.product p { font-size:13px; margin:0 0 12px; }
-.price { font-weight:900; font-size:18px; }
-.product .btn { width:100%; margin-top:12px; padding:11px 5px; font-size:13px; }
-.notice {
-  margin-top:24px;
-  padding:16px;
-  border:1px solid #26364d;
-  background:#101827;
-  border-radius:14px;
-  font-size:12px;
-  color:var(--muted);
-  line-height:1.6;
-}
-footer {
-  padding:24px 16px;
-  text-align:center;
-  border-top:1px solid #202a3c;
-  color:var(--muted);
-  font-size:12px;
-}
-.bottom {
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  z-index:10;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  padding:12px 16px calc(12px + env(safe-area-inset-bottom));
-  background:#090d16f5;
-  border-top:1px solid #253148;
-}
-.bottom .btn { padding:13px 5px; }
-@media(min-width:650px) {
-  .grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
-  h1 { font-size:46px; }
-}
+:root{--green:#39ff14;--bg:#050705;--card:#101510;--muted:#a0aaa0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#f5fff4;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app{min-height:100vh;padding-bottom:100px;background:radial-gradient(ellipse at 90% 0%,#16451b 0,transparent 35%),#050705}
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:15px;background:#080b08ed;border-bottom:1px solid #28562a;backdrop-filter:blur(15px)}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{display:grid;place-items:center;width:43px;height:43px;border:2px solid var(--green);border-radius:50%;color:var(--green);font-size:24px;font-weight:900;box-shadow:0 0 16px #39ff1455}
+.brand strong{letter-spacing:2px}
+.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;margin-top:3px}
+.pill,.outline{background:#101810;color:var(--green);border:1px solid #387d32;border-radius:12px;padding:10px}
+.wrap{max-width:1050px;margin:auto;padding:16px}
+.welcome{padding:23px 18px;border:1px solid #34752c;border-radius:22px;background:linear-gradient(135deg,#142718,#080b08);box-shadow:0 0 25px #39ff1410}
+.eyebrow{color:var(--green);font-size:11px;letter-spacing:3px;font-weight:800}
+h1{font-size:clamp(27px,7vw,40px);margin:12px 0}
+p{line-height:1.55}
+.muted{color:var(--muted);font-size:13px}
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:18px 0}
+select,input,textarea{width:100%;padding:12px;background:#0b100b;color:white;border:1px solid #315b30;border-radius:12px}
+.count{display:inline-block;margin-top:18px;color:var(--green);border:1px solid #34752c;border-radius:20px;padding:7px 12px;font-size:13px}
+.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.product{overflow:hidden;border:1px solid #28572b;border-radius:17px;background:#0b100b;box-shadow:0 5px 22px #0008}
+.photo{height:125px;display:grid;place-items:center;background:radial-gradient(circle,#28472a,#101510 70%);font-size:53px}
+.product-info{padding:11px}
+.product h3{font-size:14px;line-height:1.4;min-height:39px;margin:0}
+.price{color:var(--green);font-size:18px;font-weight:900;margin:10px 0}
+.add,.primary{width:100%;padding:12px;border:0;border-radius:12px;background:var(--green);color:#061005;font-weight:900;margin-top:9px}
+.outline{width:100%;margin-top:7px}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:24px 0 12px}
+.section-title h2{font-size:14px;letter-spacing:2px;color:var(--green)}
+.panel{padding:16px;background:#0c110c;border:1px solid #294c2b;border-radius:18px;margin:12px 0}
+.line{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #263126}
+.line:last-child{border-bottom:0}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{background:#142416;color:var(--green);border:1px solid #34752c;border-radius:50%;width:30px;height:30px}
+.field{display:grid;gap:7px;margin:13px 0}
+.field label{font-size:13px;color:#c2d0c1}
+.view{display:none}
+.view.active{display:block}
+.empty{text-align:center;color:var(--muted);padding:25px}
+.notice{padding:12px;border:1px solid #397135;border-radius:12px;background:#122015;color:#d7fbd2;font-size:13px;line-height:1.5}
+.dock{position:fixed;z-index:8;bottom:8px;left:10px;right:10px;max-width:700px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);padding:7px;background:#080b08f5;border:1px solid #315b30;border-radius:20px;box-shadow:0 0 25px #39ff1420}
+.dock button{border:0;background:transparent;color:#a0aaa0;padding:8px 0;font-size:11px;border-radius:12px}
+.dock button span{display:block;font-size:20px;margin-bottom:4px}
+.dock button.active{color:var(--green);background:#142416}
+.badge{color:var(--green);font-weight:bold}
+.review{border-bottom:1px solid #263126;padding:12px 0}
+.stars{color:var(--green)}
+.footer{text-align:center;color:#7e8c80;font-size:11px;padding:25px 0}
+.modal{display:none;position:fixed;z-index:20;inset:0;background:#000c;align-items:flex-end}
+.modal.show{display:flex}
+.sheet{background:#0b110b;border:1px solid #397135;border-radius:22px 22px 0 0;padding:20px;width:100%;max-height:85vh;overflow:auto}
+@media(min-width:650px){.products{grid-template-columns:repeat(3,minmax(0,1fr))}.photo{height:180px}.wrap{padding:25px}}
+@media(min-width:900px){.products{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style>
 </head>
 <body>
-
+<main class="app">
 <header>
-  <div class="logo">SULLY <span>MARKET</span></div>
-  <div class="pill">● BOUTIQUE</div>
+<div class="brand"><div class="logo">S</div><div><strong>SULLY MARKET</strong><small>BOUTIQUE OFFICIELLE</small></div></div>
+<button class="pill" onclick="showView('cart')">🛒 <span id="cart-count">0</span></button>
 </header>
-
-<main>
-  <section class="hero">
-    <div class="eyebrow">BIENVENUE CHEZ SULLY</div>
-    <h1>Découvre ton<br>univers.</h1>
-    <p>
-      Retrouvez notre sélection de produits,
-      les nouveautés et les informations de la boutique.
-    </p>
-    <div class="actions">
-      <a class="btn primary" href="#catalogue">Découvrir</a>
-      <a class="btn" href="https://t.me/" id="channelHero">
-        Notre canal ↗
-      </a>
-    </div>
-  </section>
-
-  <div class="section-head" id="catalogue">
-    <h2>Notre sélection</h2>
-    <span class="small">CATALOGUE</span>
-  </div>
-
-  <section class="grid" id="products"></section>
-
-  <div class="notice">
-    Les produits proposés doivent respecter la législation applicable.
-    Pour les produits CBD, vérifiez leur conformité et les règles de
-    commercialisation en vigueur en France. Les prix et descriptions
-    affichés sont des exemples à remplacer.
-  </div>
-</main>
-
-<footer>
-  SULLY MARKET · Informations et catalogue<br>
-  © <span id="year"></span> Tous droits réservés
-</footer>
-
-<nav class="bottom">
-  <a class="btn primary" id="channelBottom"
-     href="https://t.me/">CANAL POT…</a>
-  <a class="btn" id="contactBottom"
-     href="https://t.me/">CONTACT</a>
+<div class="wrap">
+<section class="view active" id="home">
+<div class="welcome">
+<div class="eyebrow">● BIENVENUE CHEZ SULLY</div>
+<h1>Ta sélection.<br><span style="color:var(--green)">Ton univers.</span></h1>
+<p class="muted">Découvre notre catalogue et retrouve les informations de chaque produit.</p>
+</div>
+<div class="count" id="product-count">6 produits</div>
+<div class="filters">
+<select id="category" onchange="renderProducts()">
+<option value="all">Toutes catégories</option>
+<option value="fleurs">Fleurs CBD</option>
+<option value="resines">Résines CBD</option>
+<option value="huiles">Huiles</option>
+<option value="infusions">Infusions</option>
+<option value="soins">Soins</option>
+</select>
+<select id="sort" onchange="renderProducts()">
+<option value="featured">À la une</option>
+<option value="low">Prix croissant</option>
+<option value="high">Prix décroissant</option>
+</select>
+</div>
+<div class="products" id="products"></div>
+<div class="footer">SULLY MARKET · Catalogue de démonstration</div>
+</section>
+<section class="view" id="cart">
+<div class="section-title"><h2>MON PANIER</h2><button class="outline" onclick="showView('home')">Continuer</button></div>
+<div class="panel" id="cart-lines"></div>
+<div class="panel"><div class="line"><strong>Total estimé</strong><strong class="price" id="cart-total">0,00 €</strong></div><button class="primary" onclick="showView('checkout')">Continuer la commande →</button></div>
+</section>
+<section class="view" id="checkout">
+<div class="section-title"><h2>COMMANDE</h2></div>
+<div class="notice">Maquette uniquement : cette commande ne sera pas transmise à Telegram tant que Make ne sera pas connecté.</div>
+<form id="order-form" class="panel">
+<div class="field"><label>Nom et prénom</label><input id="customer" required placeholder="Ton nom"></div>
+<div class="field"><label>Téléphone</label><input id="phone" type="tel" required placeholder="Ton numéro"></div>
+<div class="field"><label>Adresse</label><input id="address" required placeholder="Adresse de livraison"></div>
+<div class="field"><label>Mode de livraison</label><select id="delivery"><option>À définir avec le vendeur</option><option>Retrait à convenir</option><option>Livraison à convenir</option></select></div>
+<div class="field"><label>Message complémentaire</label><textarea id="notes" rows="3" placeholder="Précisions facultatives"></textarea></div>
+<div class="line"><strong>Total estimé</strong><strong class="price" id="checkout-total">0,00 €</strong></div>
+<button class="primary" type="submit">Préparer ma commande</button>
+</form>
+</section>
+<section class="view" id="reviews">
+<div class="section-title"><h2>AVIS CLIENTS</h2></div>
+<div class="panel"><p class="muted">Les avis ci-dessous sont des exemples de présentation, pas des témoignages vérifiés.</p>
+<div class="review"><div class="stars">★★★★★</div><strong>Exemple client</strong><p class="muted">Présentation claire et navigation simple.</p></div>
+<div id="new-reviews"></div>
+</div>
+<form id="review-form" class="panel"><h3>Ajouter un avis</h3>
+<div class="field"><label>Prénom</label><input id="review-name" required></div>
+<div class="field"><label>Note</label><select id="review-score"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select></div>
+<div class="field"><label>Commentaire</label><textarea id="review-text" required></textarea></div>
+<button class="primary">Ajouter à cette démo</button></form>
+</section>
+<section class="view" id="contact">
+<div class="section-title"><h2>CONTACT</h2></div>
+<div class="panel"><p>Une question ? Contacte Sully Market.</p>
+<div class="field"><label>Ton message</label><textarea id="contact-message" rows="4" placeholder="Écris ton message"></textarea></div>
+<button class="primary" onclick="contactMessage()">Préparer le message</button>
+<p class="muted">Le lien de contact Telegram sera ajouté quand tu me donneras ton nom d’utilisateur Telegram.</p>
+</div>
+</section>
+</div>
+<nav class="dock">
+<button class="active" data-view="home" onclick="showView('home')"><span>⌂</span>Accueil</button>
+<button data-view="reviews" onclick="showView('reviews')"><span>☆</span>Avis</button>
+<button data-view="cart" onclick="showView('cart')"><span>🛒</span>Panier <span class="badge" id="dock-count">0</span></button>
+<button data-view="contact" onclick="showView('contact')"><span>✉</span>Contact</button>
 </nav>
-
+<div class="modal" id="product-modal" onclick="if(event.target===this)closeProduct()"><div class="sheet"><button class="outline" onclick="closeProduct()">Fermer ✕</button><div id="product-detail"></div></div></div>
+</main>
 <script>
-const CONFIG = {
-  // Remplace par tes véritables liens Telegram
-  channel: "https://t.me/TON_CANAL",
-  contact: "https://t.me/TON_PSEUDO"
-};
-
-const products = [
-  {
-    name: "Produit découverte",
-    description: "Ajoute ici la description du produit.",
-    price: "À compléter",
-    image: "",
-    video: ""
-  },
-  {
-    name: "Sélection premium",
-    description: "Présente ici les caractéristiques du produit.",
-    price: "À compléter",
-    image: "",
-    video: ""
-  },
-  {
-    name: "Nouveauté",
-    description: "Découvre les informations de notre sélection.",
-    price: "À compléter",
-    image: "",
-    video: ""
-  },
-  {
-    name: "Notre collection",
-    description: "Ajoute ici les détails et les formats disponibles.",
-    price: "À compléter",
-    image: "",
-    video: ""
-  }
+const catalog=[
+{id:1,name:"Fleur CBD — Green House",cat:"fleurs",price:8.90,emoji:"🌿",desc:"Exemple de fiche produit. Ajouter les informations exactes de composition et de conformité avant publication."},
+{id:2,name:"Fleur CBD — Indoor Premium",cat:"fleurs",price:12.90,emoji:"🍃",desc:"Exemple de présentation. Les caractéristiques doivent correspondre au produit réellement vendu."},
+{id:3,name:"Résine CBD — Amnesia",cat:"resines",price:10.90,emoji:"🟩",desc:"Exemple de fiche produit. Vérifier la réglementation et l'étiquetage applicables."},
+{id:4,name:"Huile CBD — 10 %",cat:"huiles",price:24.50,emoji:"🧴",desc:"Exemple de fiche. Compléter la composition et les mentions obligatoires."},
+{id:5,name:"Infusion au chanvre",cat:"infusions",price:7.50,emoji:"🍵",desc:"Exemple de fiche produit à adapter aux informations réelles de l'emballage."},
+{id:6,name:"Baume au chanvre",cat:"soins",price:16.90,emoji:"🌱",desc:"Exemple de produit cosmétique. Vérifier les règles de commercialisation applicables."}
 ];
-
-document.getElementById("channelHero").href = CONFIG.channel;
-document.getElementById("channelBottom").href = CONFIG.channel;
-document.getElementById("contactBottom").href = CONFIG.contact;
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-
-const container = document.getElementById("products");
-
-products.forEach((product) => {
-  const card = document.createElement("article");
-  card.className = "product";
-
-  const media = document.createElement(
-    product.video ? "video" : "img"
-  );
-
-  if (product.video) {
-    media.src = product.video;
-    media.controls = true;
-    media.playsInline = true;
-    media.preload = "metadata";
-  } else if (product.image) {
-    media.src = product.image;
-    media.alt = product.name;
-  } else {
-    media.alt = product.name;
-    media.src = "https://placehold.co/600x600/182337/ffffff?text=Sully+Market";
-  }
-
-  const body = document.createElement("div");
-  body.className = "product-body";
-
-  const title = document.createElement("h3");
-  title.textContent = product.name;
-
-  const desc = document.createElement("p");
-  desc.textContent = product.description;
-
-  const price = document.createElement("div");
-  price.className = "price";
-  price.textContent = product.price;
-
-  const contact = document.createElement("a");
-  contact.className = "btn primary";
-  contact.href = CONFIG.contact;
-  contact.textContent = "Nous contacter";
-
-  body.append(title, desc, price, contact);
-  card.append(media, body);
-  container.append(card);
+let cart={};
+const euros=n=>n.toLocaleString("fr-FR",{style:"currency",currency:"EUR"});
+function renderProducts(){
+const c=document.getElementById("category").value;
+const s=document.getElementById("sort").value;
+let arr=catalog.filter(p=>c==="all"||p.cat===c);
+if(s==="low")arr.sort((a,b)=>a.price-b.price);
+if(s==="high")arr.sort((a,b)=>b.price-a.price);
+document.getElementById("product-count").textContent=arr.length+" produit(s)";
+document.getElementById("products").innerHTML=arr.map(p=>`<article class="product"><div class="photo" onclick="openProduct(${p.id})">${p.emoji}</div><div class="product-info"><h3>${p.name}</h3><div class="price">${euros(p.price)}</div><button class="add" onclick="add(${p.id})">＋ Ajouter</button><button class="outline" onclick="openProduct(${p.id})">Voir le produit</button></div></article>`).join("");
+}
+function add(id){cart[id]=(cart[id]||0)+1;updateCart()}
+function change(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];updateCart()}
+function total(){return Object.entries(cart).reduce((sum,[id,q])=>sum+catalog.find(p=>p.id==id).price*q,0)}
+function updateCart(){
+const count=Object.values(cart).reduce((a,b)=>a+b,0);
+document.getElementById("cart-count").textContent=count;
+document.getElementById("dock-count").textContent=count;
+const entries=Object.entries(cart);
+document.getElementById("cart-lines").innerHTML=entries.length?entries.map(([id,q])=>{const p=catalog.find(x=>x.id==id);return `<div class="line"><div><strong>${p.emoji} ${p.name}</strong><div class="muted">${euros(p.price)} / unité</div></div><div class="qty"><button onclick="change(${id},-1)">−</button>${q}<button onclick="change(${id},1)">+</button></div><strong>${euros(p.price*q)}</strong></div>`}).join(""):'<div class="empty">Ton panier est vide.</div>';
+document.getElementById("cart-total").textContent=euros(total());
+document.getElementById("checkout-total").textContent=euros(total());
+}
+function showView(v){
+document.querySelectorAll(".view").forEach(e=>e.classList.toggle("active",e.id===v));
+document.querySelectorAll(".dock button").forEach(e=>e.classList.toggle("active",e.dataset.view===v));
+window.scrollTo({top:0,behavior:"smooth"});
+}
+function openProduct(id){
+const p=catalog.find(x=>x.id===id);
+document.getElementById("product-detail").innerHTML=`<div class="photo" style="border-radius:15px;margin:15px 0">${p.emoji}</div><div class="eyebrow">FICHE PRODUIT</div><h2>${p.name}</h2><p>${p.desc}</p><div class="price">${euros(p.price)}</div><button class="primary" onclick="add(${p.id});closeProduct()">Ajouter au panier</button>`;
+document.getElementById("product-modal").classList.add("show");
+}
+function closeProduct(){document.getElementById("product-modal").classList.remove("show")}
+function contactMessage(){
+const msg=document.getElementById("contact-message").value.trim();
+if(!msg){alert("Écris ton message d'abord.");return}
+alert("Ton message est prêt, mais le contact Telegram n'est pas encore connecté.");
+}
+document.getElementById("order-form").addEventListener("submit",e=>{
+e.preventDefault();
+if(!Object.keys(cart).length){alert("Ajoute un produit au panier.");showView("home");return}
+alert("Commande de démonstration préparée. Rien n'a été envoyé à Telegram. La connexion à Make reste à réaliser.");
 });
+document.getElementById("review-form").addEventListener("submit",e=>{
+e.preventDefault();
+const name=document.getElementById("review-name").value.replace(/[<>]/g,"");
+const score=Number(document.getElementById("review-score").value);
+const txt=document.getElementById("review-text").value.replace(/[<>]/g,"");
+document.getElementById("new-reviews").insertAdjacentHTML("afterbegin",`<div class="review"><div class="stars">${"★".repeat(score)}${"☆".repeat(5-score)}</div><strong>${name}</strong><p>${txt}</p><span class="muted">Avis local de démonstration</span></div>`);
+e.target.reset();
+});
+renderProducts();
+updateCart();
 </script>
-
 </body>
 </html>
