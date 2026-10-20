@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090d16">
+<title>Sully Market</title>
+<style>
+:root {
+  --bg:#090d16;
+  --card:#121a29;
+  --blue:#2489ff;
+  --text:#f5f7ff;
+  --muted:#9aa9c1;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+}
+header {
+  padding:22px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #202a3c;
+  position:sticky;
+  top:0;
+  background:#090d16f5;
+  z-index:5;
+}
+.logo { font-size:21px; font-weight:900; }
+.logo span { color:var(--blue); }
+.pill {
+  background:#102747;
+  color:#72b5ff;
+  border:1px solid #24528b;
+  padding:8px 12px;
+  border-radius:20px;
+  font-size:12px;
+}
+main { max-width:900px; margin:auto; padding:20px 16px 90px; }
+.hero {
+  padding:30px 20px;
+  border-radius:22px;
+  background:linear-gradient(140deg,#142c4d,#101827 65%,#111827);
+  border:1px solid #263a57;
+}
+.eyebrow {
+  color:#65aaff;
+  font-size:12px;
+  letter-spacing:2px;
+  font-weight:800;
+}
+h1 { font-size:34px; line-height:1.12; margin:14px 0; }
+p { color:var(--muted); line-height:1.6; }
+.actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
+.btn {
+  display:inline-block;
+  padding:13px 16px;
+  border-radius:12px;
+  text-decoration:none;
+  color:white;
+  font-weight:700;
+  text-align:center;
+  border:1px solid #34445e;
+  background:#182337;
+  cursor:pointer;
+}
+.btn.primary {
+  background:var(--blue);
+  border-color:var(--blue);
+}
+.section-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:30px 0 16px;
+  gap:12px;
+}
+h2 { font-size:21px; margin:0; }
+.small { font-size:12px; color:var(--muted); }
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:13px;
+}
+.product {
+  background:var(--card);
+  border:1px solid #243148;
+  border-radius:17px;
+  overflow:hidden;
+}
+.product img,.product video {
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  display:block;
+  background:#182337;
+}
+.product-body { padding:13px; }
+.product h3 { margin:0 0 7px; font-size:16px; }
+.product p { font-size:13px; margin:0 0 12px; }
+.price { font-weight:900; font-size:18px; }
+.product .btn { width:100%; margin-top:12px; padding:11px 5px; font-size:13px; }
+.notice {
+  margin-top:24px;
+  padding:16px;
+  border:1px solid #26364d;
+  background:#101827;
+  border-radius:14px;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.6;
+}
+footer {
+  padding:24px 16px;
+  text-align:center;
+  border-top:1px solid #202a3c;
+  color:var(--muted);
+  font-size:12px;
+}
+.bottom {
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:10;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  background:#090d16f5;
+  border-top:1px solid #253148;
+}
+.bottom .btn { padding:13px 5px; }
+@media(min-width:650px) {
+  .grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  h1 { font-size:46px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">SULLY <span>MARKET</span></div>
+  <div class="pill">● BOUTIQUE</div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">BIENVENUE CHEZ SULLY</div>
+    <h1>Découvre ton<br>univers.</h1>
+    <p>
+      Retrouvez notre sélection de produits,
+      les nouveautés et les informations de la boutique.
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="#catalogue">Découvrir</a>
+      <a class="btn" href="https://t.me/" id="channelHero">
+        Notre canal ↗
+      </a>
+    </div>
+  </section>
+
+  <div class="section-head" id="catalogue">
+    <h2>Notre sélection</h2>
+    <span class="small">CATALOGUE</span>
+  </div>
+
+  <section class="grid" id="products"></section>
+
+  <div class="notice">
+    Les produits proposés doivent respecter la législation applicable.
+    Pour les produits CBD, vérifiez leur conformité et les règles de
+    commercialisation en vigueur en France. Les prix et descriptions
+    affichés sont des exemples à remplacer.
+  </div>
+</main>
+
+<footer>
+  SULLY MARKET · Informations et catalogue<br>
+  © <span id="year"></span> Tous droits réservés
+</footer>
+
+<nav class="bottom">
+  <a class="btn primary" id="channelBottom"
+     href="https://t.me/">CANAL POT…</a>
+  <a class="btn" id="contactBottom"
+     href="https://t.me/">CONTACT</a>
+</nav>
+
+<script>
+const CONFIG = {
+  // Remplace par tes véritables liens Telegram
+  channel: "https://t.me/TON_CANAL",
+  contact: "https://t.me/TON_PSEUDO"
+};
+
+const products = [
+  {
+    name: "Produit découverte",
+    description: "Ajoute ici la description du produit.",
+    price: "À compléter",
+    image: "",
+    video: ""
+  },
+  {
+    name: "Sélection premium",
+    description: "Présente ici les caractéristiques du produit.",
+    price: "À compléter",
+    image: "",
+    video: ""
+  },
+  {
+    name: "Nouveauté",
+    description: "Découvre les informations de notre sélection.",
+    price: "À compléter",
+    image: "",
+    video: ""
+  },
+  {
+    name: "Notre collection",
+    description: "Ajoute ici les détails et les formats disponibles.",
+    price: "À compléter",
+    image: "",
+    video: ""
+  }
+];
+
+document.getElementById("channelHero").href = CONFIG.channel;
+document.getElementById("channelBottom").href = CONFIG.channel;
+document.getElementById("contactBottom").href = CONFIG.contact;
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+const container = document.getElementById("products");
+
+products.forEach((product) => {
+  const card = document.createElement("article");
+  card.className = "product";
+
+  const media = document.createElement(
+    product.video ? "video" : "img"
+  );
+
+  if (product.video) {
+    media.src = product.video;
+    media.controls = true;
+    media.playsInline = true;
+    media.preload = "metadata";
+  } else if (product.image) {
+    media.src = product.image;
+    media.alt = product.name;
+  } else {
+    media.alt = product.name;
+    media.src = "https://placehold.co/600x600/182337/ffffff?text=Sully+Market";
+  }
+
+  const body = document.createElement("div");
+  body.className = "product-body";
+
+  const title = document.createElement("h3");
+  title.textContent = product.name;
+
+  const desc = document.createElement("p");
+  desc.textContent = product.description;
+
+  const price = document.createElement("div");
+  price.className = "price";
+  price.textContent = product.price;
+
+  const contact = document.createElement("a");
+  contact.className = "btn primary";
+  contact.href = CONFIG.contact;
+  contact.textContent = "Nous contacter";
+
+  body.append(title, desc, price, contact);
+  card.append(media, body);
+  container.append(card);
+});
+</script>
+
+</body>
+</html>
