@@ -918,7 +918,6 @@ function renderProducts() {
   `).join("");
 }
 
-
 function add(id, variantPrice) {
   const product = catalog.find(p => p.id === id);
 
@@ -967,7 +966,6 @@ function change(key, delta) {
 
   updateCart();
 }
-
 function updateCart() {
   const count = Object.values(cart).reduce(
     (sum, item) => sum + item.quantity, 0
@@ -1017,6 +1015,7 @@ function total() {
   return Object.values(cart).reduce((sum, item) => {
     return sum + item.price * item.quantity;
   }, 0);
+
 }
   
   function showView(view) {
