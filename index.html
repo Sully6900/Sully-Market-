@@ -1033,9 +1033,9 @@ function openProduct(id) {
     }
 
     <button class="primary"
-      onclick="add(${product.id});closeProduct()">
-      Ajouter au panier
-    </button>
+  onclick="add(${product.id}, document.getElementById('detail-variant')?.value);closeProduct()">
+  Ajouter au panier
+  </button>
   `;
 
   document.getElementById("product-modal").classList.add("show");
