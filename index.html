@@ -996,8 +996,10 @@ function goCheckout() {
   showView("checkout");
 }
 
+
 function openProduct(id) {
   const product = catalog.find(p => p.id === id);
+  const hasVariants = product.variants && product.variants.length > 0;
 
   document.getElementById("product-detail").innerHTML = `
     <div class="photo" style="border-radius:15px;margin:15px 0">
@@ -1007,9 +1009,30 @@ function openProduct(id) {
     <div class="eyebrow">FICHE PRODUIT</div>
     <h2>${product.name}</h2>
     <p>${product.desc}</p>
-    <div class="price">${euros(product.price)}</div>
 
-    <button class="primary" onclick="add(${product.id});closeProduct()">
+    ${
+      hasVariants
+        ? `
+          <label for="detail-variant">Choisir un format</label>
+          <select id="detail-variant"
+            onchange="document.getElementById('detail-price').textContent =
+            euros(Number(this.value))">
+            ${product.variants.map((v, i) => `
+              <option value="${v.price}" ${i === 0 ? "selected" : ""}>
+                ${v.label}
+              </option>
+            `).join("")}
+          </select>
+
+          <div class="price" id="detail-price">
+            ${euros(product.variants[0].price)}
+          </div>
+        `
+        : `<div class="price">${euros(product.price)}</div>`
+    }
+
+    <button class="primary"
+      onclick="add(${product.id});closeProduct()">
       Ajouter au panier
     </button>
   `;
