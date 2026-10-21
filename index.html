@@ -264,28 +264,6 @@ select:focus, input:focus, textarea:focus {
   pointer-events: none;
 }
 
-.photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.photo.has-image {
-  padding: 0;
-  overflow: hidden;
-}
-
-.product-video {
-  display: block;
-  width: 100%;
-  max-height: 360px;
-  margin: 14px 0;
-  background: #000;
-  border: 1px solid #7137c9;
-  border-radius: 14px;
-}
-
 .product-info {
   padding: 11px;
 }
@@ -542,7 +520,7 @@ select:focus, input:focus, textarea:focus {
   }
 }
 </style>
-</head>
+  </head>
 
 <body>
 <main class="app">
@@ -599,7 +577,7 @@ select:focus, input:focus, textarea:focus {
   <div class="products" id="products"></div>
 
   <div class="footer">
-    SULLY MARKET · Le seul cercle ou tout est carré
+    SULLY MARKET · Bonne visite et à bientot 🤝😉
   </div>
 </section>
 
@@ -764,33 +742,37 @@ select:focus, input:focus, textarea:focus {
 </main>
 
 <script>
-const catalog = [
+  const catalog = [
   {
     id: 1,
     name: "Blue Lobster — Mousse premium ",
     cat: "Jaune",
     price: 50,
     variants: [
-  { label: "12G — 50 €", price: 50 },
-  { label: "24G — 100 €", price: 100 },
-  { label: "36G — 140 €", price: 140 },
-  { label: "48G — 170 €", price: 170 },
-  { label: "100G — 300 €", price: 300 },
-  { label: "1KG — 2500 €", price: 2500 }
-],
+      { label: "12G — 50 €", price: 50 },
+      { label: "24G — 100 €", price: 100 },
+      { label: "36G — 140 €", price: 140 },
+      { label: "48G — 170 €", price: 170 },
+      { label: "100G — 300 €", price: 300 },
+      { label: "1KG — 2500 €", price: 2500 }
+    ],
     emoji: "🧽",
-    image: "", // Exemple : "media/blue-lobster.jpg"
-    video: "", // Exemple : "media/blue-lobster.mp4"
-    desc: "Jaune mousseux de qualité, gout et effets assurés"
+    desc: "Jaune mousseux de qualité premium, gout et effets assurés"
   },
   {
     id: 2,
     name: "Olive 3X Filtré 73U — Undebranded",
     cat: "Chocolat",
     price: 70,
-    emoji: "🫒🍫",
-    image: "", // Exemple : "media/blue-lobster.jpg"
-    video: "", // Exemple : "media/blue-lobster.mp4"
+    variants: [
+  { label: "10G — 70 €", price: 70 },
+  { label: "20G— 120 €", price: 120 },
+  { label: "30G — 180 €", price: 180 },
+  { label: "50G — 240 €", price: 240 },
+  { label: "100G — 450€ ", price: 450 },
+  { label: "1KG — 3800€ ", price: 3800 }
+],
+ emoji: "🫒🍫",
     desc: "Olive 3X filtré no farm, gout et effets assurés "
   },
   {
@@ -798,9 +780,12 @@ const catalog = [
     name: "Dry Sift — Underbranded",
     cat: "Chocolat",
     price: 200,
+    variants: [
+  { label: "50G — 200 €", price: 200 },
+  { label: "100G — 350 €", price: 350 },
+  { label: "1KG — 2700 €", price: 2700 }
+],
     emoji: "🍫",
-    image: "", // Exemple : "media/blue-lobster.jpg"
-    video: "", // Exemple : "media/blue-lobster.mp4"
     desc: "Gout et effets assurés, bon rapport qualité prix ✅"
   },
   {
@@ -808,79 +793,113 @@ const catalog = [
     name: "3X filtré 90U — VVS",
     cat: "Chocolat",
     price: 80,
+    variants: [
+  { label: "10G — 80 €", price: 80 },
+  { label: "20G — 140 €", price: 140 },
+  { label: "30G — 200 €", price: 200 },
+  { label: "50G — 340 €", price: 340 },
+  { label: "100G — 580 €", price: 580 }
+  ],
     emoji: "🍫",
-    image: "", // Exemple : "media/blue-lobster.jpg"
-    video: "", // Exemple : "media/blue-lobster.mp4"
     desc: "Gout et effets assurés 🤯✅"
   },
   {
     id: 5,
-    name: "Frozen Sift - Haram Boyz ",
+    name: "Frozen Sift - Haram Boyz 🇲🇦 ",
     cat: "Chocolat",
     price: 100,
+    variants: [
+  { label: "5G — 100 €", price: 100 },
+  { label: "10G — 180 €", price: 180 },
+  { label: "25G — 300 €", price: 300 },
+  { label: "50G — 550 €", price: 550 },
+  { label: "100G — 1000 €", price: 1000 }
+],
     emoji: "🧊🍫",
-    image: "", // Exemple : "media/blue-lobster.jpg"
-    video: "", // Exemple : "media/blue-lobster.mp4"
     desc: "Gout et effets garantis 🧊🤯"
   },
   {
     id: 6,
-    name: "Amnésia ",
+    name: "Amnésia 🇳🇱",
     cat: "Weed",
     price: 70,
+    variants: [
+  { label: "10G — 70 €", price: 70 },
+  { label: "20G  — 130 €", price: 130 },
+  { label: "30G — 150 €", price: 150 },
+  { label: "50G — 280 €", price: 280 },
+  { label: "100G — 500 €", price: 500 }
+],
     emoji: "🇳🇱",
-    image: "", // Exemple : "media/blue-lobster.jpg"
-    video: "", // Exemple : "media/blue-lobster.mp4"
     desc: "Gout et effets assurés ✅"
   },
   {
     id: 7,
-    name: "Cali Spain - Zkitless ",
+    name: "Cali Spain 🇪🇸 - Zkitless 🍭",
     cat: "Weed",
     price: 80,
+    variants: [
+  { label: "10G — 80 €", price: 80 },
+  { label: "20G — 150 €", price: 150 },
+  { label: "30G — 200 €", price: 200 },
+  { label: "50G — 300 €", price: 300 },
+  { label: "100G — 550 €", price: 550 }
+],
     emoji: "🇪🇸",
-    image: "", // Exemple : "media/blue-lobster.jpg"
-    video: "", // Exemple : "media/blue-lobster.mp4"
     desc: "Gout et effets assurés ✅"
   },
   {
     id: 8,
-    name: "Cali Usa - Blue Magic ",
+    name: "Cali Usa 🇺🇸 - Blue Magic ",
     cat: "Weed",
     price: 80,
+    variants: [
+  { label: "5G — 80 €", price: 80 },
+  { label: "10G — 150 €", price: 150 },
+  { label: "25G — 250 €", price: 250 },
+  { label: "50G — 500 €", price: 500 }
+],
     emoji: "🇺🇸",
-    image: "", // Exemple : "media/blue-lobster.jpg"
-    video: "", // Exemple : "media/blue-lobster.mp4"
     desc: "Gout et effets assurés ✅"
   },
   {
     id: 9,
-    name: "Ecaille ❄️ ",
+    name: "❄️ Ecaille 🇨🇴 ",
     cat: "Neige",
     price: 60,
+    variants: [
+  { label: "1G — 60 €", price: 60 },
+  { label: "3G — 160 €", price: 160 },
+  { label: "5G + 1G offert — 300 €", price: 300 },
+  { label: "10G + 2G offert — 600 €", price: 600 },
+  { label: "50G  — 1850€ ", price: 1850 }
+],
     emoji: "🇨🇴",
-    image: "", // Exemple : "media/blue-lobster.jpg"
-    video: "", // Exemple : "media/blue-lobster.mp4"
     desc: "Gout et effets assurés ✅"
   },
   {
     id: 10,
-    name: "Olive ❄️ ",
+    name: "❄️🫒 Olive 🇸🇷 ",
     cat: "Neige",
     price: 60,
+        variants: [
+  { label: "1G — 60 €", price: 60 },
+  { label: "3G — 160 €", price: 160 },
+  { label: "5G + 1G offert — 300 €", price: 300 },
+  { label: "10G + 2G offert — 600 €", price: 600 },
+  { label: "50G  — 1900€ ", price: 1900 }
+],
     emoji: "🇸🇷",
-    image: "", // Exemple : "media/blue-lobster.jpg"
-    video: "", // Exemple : "media/blue-lobster.mp4"
     desc: "Gout et effets assurés ✅"
   },
-  ];
+];
+
 let cart = {};
 
 const euros = n => n.toLocaleString("fr-FR", {
   style: "currency",
   currency: "EUR"
 });
-
 
 function renderProducts() {
   const category = document.getElementById("category").value;
@@ -903,11 +922,7 @@ function renderProducts() {
 
   document.getElementById("products").innerHTML = products.map(p => `
     <article class="product">
-      <div class="photo ${p.image ? "has-image" : ""}" onclick="openProduct(${p.id})">
-        ${p.image
-          ? `<img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.remove('has-image');this.parentElement.textContent='${p.emoji}'">`
-          : p.emoji}
-      </div>
+      <div class="photo" onclick="openProduct(${p.id})">${p.emoji}</div>
 
       <div class="product-info">
         <h3>${p.name}</h3>
@@ -952,14 +967,25 @@ function add(id, source = "catalog") {
 
   let variantIndex = -1;
   if (product.variants && product.variants.length) {
-    const selectorId = source === "detail" ? "detail-variant" : `variant-${product.id}`;
+    const selectorId = source === "detail"
+      ? "detail-variant"
+      : `variant-${product.id}`;
     const selector = document.getElementById(selectorId);
     variantIndex = selector ? selector.selectedIndex : 0;
   }
 
-  const variant = variantIndex >= 0 ? product.variants[variantIndex] : null;
-  const price = variant ? Number(variant.price) : Number(product.price);
-  const variantLabel = variant ? variant.label : "Format standard";
+  const variant = variantIndex >= 0
+    ? product.variants[variantIndex]
+    : null;
+
+  const price = variant
+    ? Number(variant.price)
+    : Number(product.price);
+
+  const variantLabel = variant
+    ? variant.label
+    : "Format standard";
+
   const key = `${product.id}_${variantIndex >= 0 ? variantIndex : "base"}`;
 
   if (!cart[key]) {
@@ -970,6 +996,7 @@ function add(id, source = "catalog") {
       variantLabel
     };
   }
+
   cart[key].quantity += 1;
   updateCart();
 }
@@ -988,20 +1015,27 @@ function total() {
 }
 
 function updateCart() {
-  const count = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
+  const count = Object.values(cart).reduce(
+    (sum, item) => sum + item.quantity, 0
+  );
+
   document.getElementById("cart-count").textContent = count;
   document.getElementById("dock-count").textContent = count;
 
   const entries = Object.entries(cart);
+
   document.getElementById("cart-lines").innerHTML = entries.length
     ? entries.map(([key, item]) => {
         const product = catalog.find(p => p.id === item.id);
         if (!product) return "";
+
         return `
           <div class="line">
             <div>
               <strong>${product.emoji} ${product.name}</strong>
-              <div class="muted">${item.variantLabel} · ${euros(item.price)} / unité</div>
+              <div class="muted">
+                ${item.variantLabel} · ${euros(item.price)} / unité
+              </div>
             </div>
             <div class="qty">
               <button onclick="change('${key}', -1)">−</button>
@@ -1017,8 +1051,7 @@ function updateCart() {
   document.getElementById("cart-total").textContent = euros(total());
   document.getElementById("checkout-total").textContent = euros(total());
 }
-
-function showView(view) {
+  function showView(view) {
   document.querySelectorAll(".view").forEach(element => {
     element.classList.toggle("active", element.id === view);
   });
@@ -1040,53 +1073,51 @@ function goCheckout() {
   showView("checkout");
 }
 
-
 function openProduct(id) {
   const product = catalog.find(p => p.id === id);
   if (!product) return;
+
   const hasVariants = product.variants && product.variants.length > 0;
 
-  const mediaImage = product.image
-    ? `<div class="photo has-image" style="border-radius:15px;margin:15px 0;overflow:hidden">
-         <img src="${product.image}" alt="${product.name}" onerror="this.style.display='none';this.parentElement.classList.remove('has-image');this.parentElement.textContent='${product.emoji}'">
-       </div>`
-    : `<div class="photo" style="border-radius:15px;margin:15px 0">${product.emoji}</div>`;
-
-  const mediaVideo = product.video
-    ? `<video class="product-video" controls playsinline preload="metadata" src="${product.video}">
-         Ton navigateur ne peut pas lire cette vidéo.
-       </video>`
-    : `<p class="muted">Vidéo à ajouter ultérieurement.</p>`;
-
   document.getElementById("product-detail").innerHTML = `
-    ${mediaImage}
+    <div class="photo" style="border-radius:15px;margin:15px 0">
+      ${product.emoji}
+    </div>
+
     <div class="eyebrow">FICHE PRODUIT</div>
     <h2>${product.name}</h2>
     <p>${product.desc}</p>
-    ${mediaVideo}
+
     ${
       hasVariants
         ? `
           <label for="detail-variant">Choisir un format</label>
           <select id="detail-variant"
-            onchange="document.getElementById('detail-price').textContent = euros(Number(this.value))">
+            onchange="document.getElementById('detail-price').textContent =
+            euros(Number(this.value))">
             ${product.variants.map((v, i) => `
               <option value="${v.price}" ${i === 0 ? "selected" : ""}>
                 ${v.label}
               </option>
             `).join("")}
           </select>
-          <div class="price" id="detail-price">${euros(product.variants[0].price)}</div>
+
+          <div class="price" id="detail-price">
+            ${euros(product.variants[0].price)}
+          </div>
         `
         : `<div class="price">${euros(product.price)}</div>`
     }
-    <button class="primary" onclick="add(${product.id}, 'detail');closeProduct()">
+
+    <button class="primary"
+      onclick="add(${product.id}, 'detail');closeProduct()">
       Ajouter au panier
     </button>
   `;
 
   document.getElementById("product-modal").classList.add("show");
 }
+
 function closeProduct() {
   document.getElementById("product-modal").classList.remove("show");
 }
@@ -1129,6 +1160,7 @@ document.getElementById("order-form").addEventListener("submit", async event => 
 
     items: Object.values(cart).map(item => {
       const product = catalog.find(p => p.id === item.id);
+
       return {
         product: product.name,
         variant: item.variantLabel,
@@ -1202,3 +1234,6 @@ updateCart();
 </script>
 </body>
 </html>
+  
+  
+  
