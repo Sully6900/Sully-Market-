@@ -856,6 +856,7 @@ const euros = n => n.toLocaleString("fr-FR", {
   currency: "EUR"
 });
 
+
 function renderProducts() {
   const category = document.getElementById("category").value;
   const sort = document.getElementById("sort").value;
@@ -882,7 +883,27 @@ function renderProducts() {
       <div class="product-info">
         <h3>${p.name}</h3>
 
-        <div class="price">${euros(p.price)}</div>
+        ${
+          p.variants && p.variants.length
+            ? `
+              <label for="variant-${p.id}">Choisir un format</label>
+              <select id="variant-${p.id}"
+                onchange="document.getElementById('price-${p.id}').textContent =
+                euros(Number(this.value))">
+                ${p.variants.map((v, i) => `
+                  <option value="${v.price}" ${i === 0 ? "selected" : ""}>
+                    ${v.label}
+                  </option>
+                `).join("")}
+              </select>
+              <div class="price" id="price-${p.id}">
+                ${euros(p.variants[0].price)}
+              </div>
+            `
+            : `
+              <div class="price">${euros(p.price)}</div>
+            `
+        }
 
         <button class="add" onclick="add(${p.id})">
           ＋ Ajouter
