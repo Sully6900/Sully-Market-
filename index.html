@@ -918,8 +918,31 @@ function renderProducts() {
   `).join("");
 }
 
-function add(id) {
-  cart[id] = (cart[id] || 0) + 1;
+
+function add(id, variantPrice) {
+  const product = catalog.find(p => p.id === id);
+
+  if (!product) return;
+
+  const price = variantPrice !== undefined && variantPrice !== null
+    ? Number(variantPrice)
+    : product.price;
+
+  const variant = product.variants?.find(v => v.price === price);
+
+  const key = variant ? `${id}-${variant.label}` : String(id);
+
+  if (!cart[key]) {
+    cart[key] = {
+      id: id,
+      quantity: 0,
+      price: price,
+      variant: variant ? variant.label : null
+    };
+  }
+
+  cart[key].quantity += 1;
+
   updateCart();
 }
 
