@@ -1458,5 +1458,18 @@ document.getElementById("review-form").addEventListener("submit", event => {
 renderProducts();
 updateCart();
 </script>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+  if (window.Telegram && window.Telegram.WebApp) {
+    const app = window.Telegram.WebApp;
+    app.ready();
+    app.expand();
+
+    if (typeof app.requestFullscreen === "function") {
+      app.requestFullscreen();
+    }
+  }
+</script>
 </body>
 </html>
