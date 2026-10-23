@@ -530,7 +530,35 @@ select:focus, input:focus, textarea:focus {
     height: 42px;
   }
 }
-</style>
+.welcome-layout {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.welcome-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.welcome-logo {
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+  object-fit: contain;
+  border: 1px solid #ffd936;
+  border-radius: 50%;
+  padding: 5px;
+  background: #08091b;
+  box-shadow: 0 0 18px #a100ff60;
+}
+
+@media (max-width: 360px) {
+  .welcome-logo {
+    width: 72px;
+    height: 72px;
+  }
+}</style>
   </head>
 
 <body>
