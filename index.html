@@ -1412,7 +1412,7 @@ document.getElementById("order-form").addEventListener("submit", async event => 
       })
     });
 
-    alert("Demande envoyée. Vérifie sa réception dans Make avant de confirmer la commande.");
+    alert("Demande envoyée");
 
     cart = {};
     updateCart();
@@ -1420,7 +1420,7 @@ document.getElementById("order-form").addEventListener("submit", async event => 
     showView("home");
 
   } catch (error) {
-    alert("Envoi impossible. Vérifie le webhook Make et réessaie.");
+    alert("Envoi impossible");
 
   } finally {
     button.disabled = false;
