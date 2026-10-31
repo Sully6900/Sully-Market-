@@ -1420,7 +1420,7 @@ document.getElementById("order-form").addEventListener("submit", async event => 
     showView("home");
 
   } catch (error) {
-    alert("Envoi impossible. Vérifie le webhook Make et réessaie.");
+    alert("Envoi impossible. Vérifie le webhook et réessaie.");
 
   } finally {
     button.disabled = false;
@@ -1447,7 +1447,7 @@ document.getElementById("review-form").addEventListener("submit", event => {
       <div class="stars">${"★".repeat(score)}${"☆".repeat(5 - score)}</div>
       <strong>${name}</strong>
       <p>${text}</p>
-      <span class="muted">Avis local de démonstration</span>
+      <span class="muted">Avis local</span>
     </div>`
   );
 
